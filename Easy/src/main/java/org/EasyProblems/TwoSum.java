@@ -1,5 +1,8 @@
 package org.EasyProblems;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
 You are given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
  You may assume that each input would have exactly one solution, and you may not use the same element twice.
@@ -27,13 +30,16 @@ You are given an array of integers nums and an integer target, return indices of
  */
  public class TwoSum {
     public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> seen = new HashMap<>(); // number -> index
+
         for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                if (nums[i] + nums[j] == target) {
-                    System.out.println(nums[i] + " " + nums[j] + " " + target);
-                    return new int[]{i, j};
-                }
+            int needed = target - nums[i];
+
+            if (seen.containsKey(needed)) {
+                return new int[]{seen.get(needed), i};
             }
+
+            seen.put(nums[i], i);
         }
         return null;
     }
