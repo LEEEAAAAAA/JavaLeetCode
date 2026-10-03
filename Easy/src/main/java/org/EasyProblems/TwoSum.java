@@ -27,14 +27,15 @@ You are given an array of integers nums and an integer target, return indices of
  */
  public class TwoSum {
     public int[] twoSum(int[] nums, int target) {
-        for(int i = 0; i <= nums[i]; i++){
-            int currentNumber = nums[i];
-            int nextNumber = nums[i + 1];
-            if(currentNumber + nextNumber == target){
-                System.out.println(currentNumber + " " + nextNumber + " " +  target);
-                return new int[]{i, i+1};
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    System.out.println(nums[i] + " " + nums[j] + " " + target);
+                    return new int[]{i, j};
+                }
             }
         }
         return null;
     }
- }
+}
+
