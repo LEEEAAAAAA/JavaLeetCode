@@ -1,6 +1,7 @@
 package org.EasyProblems;
 
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 public class RomanToInteger {
 
@@ -14,15 +15,13 @@ public class RomanToInteger {
         romanValues.put('D', 500);
         romanValues.put('M', 1000);
 
-        int total = 0;
-        for(int i = 0; i < s.length(); i++){
-            int current = romanValues.get(s.charAt(i));
-            if (i + 1 < s.length() && current < romanValues.get(s.charAt(i + 1))) {
-                total -= current;
-            } else {
-                total += current;
-            }
-        }
+        int total = IntStream.range(0, s.length())
+                .map(i -> {
+                    int current = romanValues.get(s.charAt(i));
+                    boolean nextIsBigger = i + 1 < s.length() && current < romanValues.get(s.charAt(i + 1));
+                    return nextIsBigger ? -current : current;
+                }).sum();
+
         return total;
     }
 }
