@@ -15,13 +15,11 @@ public class RomanToInteger {
         romanValues.put('D', 500);
         romanValues.put('M', 1000);
 
-        int total = IntStream.range(0, s.length())
+        return  IntStream.range(0, s.length())
                 .map(i -> {
                     int current = romanValues.get(s.charAt(i));
                     boolean nextIsBigger = i + 1 < s.length() && current < romanValues.get(s.charAt(i + 1));
                     return nextIsBigger ? -current : current;
                 }).sum();
-
-        return total;
     }
 }
